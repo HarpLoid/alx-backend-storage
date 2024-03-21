@@ -4,8 +4,8 @@
 --	Column names must be: origin and nb_fans
 --	Your script can be executed on any database
 
-select origin,
-       sum(fans) as nb_fans
-from metal_bands
-group by origin
-order by nb_fans desc;
+SELECT origin,
+       SUM(fans) AS nb_fans
+FROM metal_bands
+GROUP BY origin
+ORDER BY nb_fans DESC;

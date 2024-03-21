@@ -5,7 +5,7 @@
 -- 	You should use attributes formed and split for computing the lifespan
 -- 	Your script can be executed on any database
 
-select band_name,
-       ifnull(split, 2022) - formed as lifespan
-from metal_bands
-order by lifespan desc
+SELECT band_name,
+       IFNULL(split, 2022) - formed AS lifespan
+FROM metal_bands
+ORDER BY lifespan DESC
