@@ -16,7 +16,8 @@ num_methods = {}
 for method in methods:
     num_methods[method] = nginx_collection.count_documents({"method": method})
 
-num_docs = nginx_collection.count_documents({"method": "GET", "path": "/status"})
+num_docs = nginx_collection.count_documents(
+    {"method": "GET", "path": "/status"})
 
 print(f"{num_logs} logs\
     Methods:\
