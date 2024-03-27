@@ -20,8 +20,9 @@ def count_calls(method: Callable) -> Callable:
         key = method.__qualname__
         self._redis.incr(key)
         return method(self, *args, **kwargs)
-    
+
     return wrapper
+
 
 def call_history(method: Callable) -> Callable:
     """
@@ -29,6 +30,7 @@ def call_history(method: Callable) -> Callable:
     """
     in_key = method.__qualname__ + ":inputs"
     out_key = method.__qualname__ + ":outputs"
+
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         """
@@ -39,6 +41,7 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(out_key, str(result))
         return result
     return wrapper
+
 
 def replay(method: Callable) -> None:
     """
@@ -81,7 +84,8 @@ class Cache:
         self._redis.set(rand_key, data)
         return rand_key
 
-    def get(self, key: str, fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+    def get(self, key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """
         converts data to desired format
         """
@@ -90,13 +94,13 @@ class Cache:
         if fn:
             return fn(value)
         return value
-    
+
     def get_str(self, key: str) -> str:
         """
         gets str value
         """
         return self.get(key, fn=str)
-    
+
     def get_str(self, key: str) -> int:
         """
         gets int value
